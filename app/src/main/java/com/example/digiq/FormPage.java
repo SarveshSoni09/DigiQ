@@ -8,10 +8,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+
 public class FormPage extends AppCompatActivity {
     EditText idName , idApp , idPhone , idEmail;
     Button btnJoin;
 
+    FirebaseDatabase rootNode;
+    DatabaseReference root_child;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,19 @@ public class FormPage extends AppCompatActivity {
             }
 
             else{
+                //calls the root node
+                rootNode = FirebaseDatabase.getInstance();
+                //calling the table
+                root_child = rootNode.getReference("names");
+
+                String name = idName.getText().toString();
+                String application_no = idApp.getText().toString();
+                String phone_no = idPhone.getText().toString();
+                String email = idEmail.getText().toString();
+
+                UserHelper obj = new UserHelper(name, application_no, phone_no, email);
+                root_child.setValue(obj);
+
                 Intent intent = new Intent(FormPage.this, QueuePage.class);
                 intent.putExtra("Name", idName.getText().toString().trim());
                 intent.putExtra("ApplicationNumber", idApp.getText().toString().trim());
