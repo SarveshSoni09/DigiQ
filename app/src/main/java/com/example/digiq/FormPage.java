@@ -63,6 +63,7 @@ public class FormPage extends AppCompatActivity {
                 char payment = '0';
                 char email_create = '0';
 
+                //use of helper class
                 UserHelper obj = new UserHelper(name, application_no, phone_no, email, form_fill, verified, file_created,payment,email_create);
                 root_child.setValue(obj);
 
