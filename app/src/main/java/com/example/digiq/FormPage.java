@@ -11,7 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FormPage extends AppCompatActivity {
     EditText idName , idApp , idPhone , idEmail;
@@ -27,7 +33,7 @@ public class FormPage extends AppCompatActivity {
 
         idName=findViewById(R.id.idName);
         idApp=findViewById(R.id.idApp);
-        idPhone=findViewById(R.id.idphone);
+        idPhone=findViewById(R.id.idPhone);
         idEmail=findViewById(R.id.idEmail);
         btnJoin=findViewById(R.id.btnJoin);
 
@@ -51,20 +57,55 @@ public class FormPage extends AppCompatActivity {
                 //calls the root node
                 rootNode = FirebaseDatabase.getInstance();
                 //calling the table
-                root_child = rootNode.getReference("names");
+                root_child = rootNode.getReference("names").push();
 
                 String name = idName.getText().toString();
                 String application_no = idApp.getText().toString();
                 String phone_no = idPhone.getText().toString();
                 String email = idEmail.getText().toString();
-                char form_fill = '0';
-                char verified = '0';
-                char file_created = '0';
-                char payment = '0';
-                char email_create = '0';
+                String form_fill = "0";
+                String verified = "0";
+                String file_created = "0";
+                String payment = "0";
+                String email_create = "0";
 
-                //use of helper class
-                UserHelper obj = new UserHelper(name, application_no, phone_no, email, form_fill, verified, file_created,payment,email_create);
+//                String [] keys = {"name","application_no","phone_no","email","form_fill","verified","file_created","payment"
+//                                    ,"email_create"};
+//
+//                String [] values = {name, application_no, phone_no, email, form_fill, verified, file_created,
+//                                    payment,email_create};
+//
+//                Map<String, JSONObject> userMap= new HashMap<String, JSONObject>();
+//                JSONObject obj = new JSONObject();
+//                try {
+//                    obj.put("name",name);
+//                    obj.put("application_no",application_no);
+//                    obj.put("phone_no",phone_no);
+//                    obj.put("email",email);
+//                    obj.put("form_fill","0");
+//                    obj.put("verified","0");
+//                    obj.put("file_created","0");
+//                    obj.put("payment","0");
+//                    obj.put("email_create","0");
+//                } catch (JSONException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//                userMap.put("myUser", obj);
+
+                UserHelper obj = new UserHelper(name,application_no,phone_no,email,form_fill,verified,file_created,payment,email_create);
+                //creating new child
+                obj.setName(name);
+                obj.setApplication_no(application_no);
+                obj.setPhone_no(phone_no);
+                obj.setEmail(email);
+                obj.setForm_fill(form_fill);
+                obj.setVerified(verified);
+                obj.setFile_created(file_created);
+                obj.setPayment(payment);
+                obj.setEmail_create(email_create);
+//                Toast.makeText(getApplicationContext(),"Done", Toast.LENGTH_LONG).show();
+
                 root_child.setValue(obj);
 
                 Intent intent = new Intent(FormPage.this, QueuePage.class);

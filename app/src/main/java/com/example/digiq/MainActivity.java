@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         btnScan.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, QrScanner.class);
+            Intent intent = new Intent(MainActivity.this, FormPage.class);
             startActivity(intent);
         });
     }

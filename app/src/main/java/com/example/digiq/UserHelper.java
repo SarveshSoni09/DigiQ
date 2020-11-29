@@ -1,10 +1,10 @@
 package com.example.digiq;
 
 public class UserHelper {
-    String name, application_no, phone_no, email;
-    char form_fill, verified, file_created, payment, email_create;
+    private String name, application_no, phone_no, email;
+    private String form_fill, verified, file_created, payment, email_create;
 
-    public UserHelper(String name, String application_no, String phone_no, String email, char form_fill, char verified, char file_created, char payment, char email_create) {
+    public UserHelper(String name, String application_no_no, String phone_no, String email, String form_fill, String verified, String file_created, String payment, String email_create) {
         this.name = name;
         this.application_no = application_no;
         this.phone_no = phone_no;
@@ -28,8 +28,8 @@ public class UserHelper {
         return application_no;
     }
 
-    public void setApplication_no(String application_no) {
-        this.application_no = application_no;
+    public void setApplication_no(String app_no) {
+        this.application_no = app_no;
     }
 
     public String getPhone_no() {
@@ -48,43 +48,43 @@ public class UserHelper {
         this.email = email;
     }
 
-    public char getForm_fill() {
+    public String getForm_fill() {
         return form_fill;
     }
 
-    public void setForm_fill(char form_fill) {
+    public void setForm_fill(String form_fill) {
         this.form_fill = form_fill;
     }
 
-    public char getVerified() {
+    public String getVerified() {
         return verified;
     }
 
-    public void setVerified(char verified) {
+    public void setVerified(String verified) {
         this.verified = verified;
     }
 
-    public char getFile_created() {
+    public String getFile_created() {
         return file_created;
     }
 
-    public void setFile_created(char file_created) {
+    public void setFile_created(String file_created) {
         this.file_created = file_created;
     }
 
-    public char getPayment() {
+    public String getPayment() {
         return payment;
     }
 
-    public void setPayment(char payment) {
+    public void setPayment(String payment) {
         this.payment = payment;
     }
 
-    public char getEmail_create() {
+    public String getEmail_create() {
         return email_create;
     }
 
-    public void setEmail_create(char email_create) {
+    public void setEmail_create(String email_create) {
         this.email_create = email_create;
     }
 }
