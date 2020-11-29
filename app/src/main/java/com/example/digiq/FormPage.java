@@ -57,8 +57,13 @@ public class FormPage extends AppCompatActivity {
                 String application_no = idApp.getText().toString();
                 String phone_no = idPhone.getText().toString();
                 String email = idEmail.getText().toString();
+                char form_fill = '0';
+                char verified = '0';
+                char file_created = '0';
+                char payment = '0';
+                char email_create = '0';
 
-                UserHelper obj = new UserHelper(name, application_no, phone_no, email);
+                UserHelper obj = new UserHelper(name, application_no, phone_no, email, form_fill, verified, file_created,payment,email_create);
                 root_child.setValue(obj);
 
                 Intent intent = new Intent(FormPage.this, QueuePage.class);
