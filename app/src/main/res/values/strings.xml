@@ -2,11 +2,11 @@
     <string name="app_name">DigiQ</string>
     <string name="heroimage">HeroImage</string>
     <string name="in_queue_msg">You are in the Queue</string>
-    <string name="name">Name Surname</string>
-    <string name="application_number">Application Number</string>
-    <string name="ticket_number">Ticket Number</string>
+    <string name="name">Name: </string>
+    <string name="application_number">Application Number: </string>
+<!--    <string name="ticket_number">Ticket Number</string>-->
     <string name="approximate_wait_time">Approximate Wait Time</string>
-    <string name="hr_m">Hr : m</string>
+<!--    <string name="hr_m">Hr : m</string>-->
     <string name="leave_confirmation">Are You Sure you want to Leave ?</string>
     <string name="leave_queue">Leave Queue</string>
     <string name="cancel">Cancel</string>

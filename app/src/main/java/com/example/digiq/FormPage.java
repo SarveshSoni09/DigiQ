@@ -6,18 +6,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.google.firebase.database.ValueEventListener;
 
 public class FormPage extends AppCompatActivity {
     EditText idName , idApp , idPhone , idEmail;
@@ -25,6 +21,8 @@ public class FormPage extends AppCompatActivity {
 
     FirebaseDatabase rootNode;
     DatabaseReference root_child;
+
+    long incrementer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,7 @@ public class FormPage extends AppCompatActivity {
                 Toast.makeText(FormPage.this,"Please Enter a VALID Email Address",Toast.LENGTH_SHORT).show();
             }
 
-            else if(idPhone.getText ().toString ().trim ().length () < 10) {
+            else if(idPhone.getText().toString().trim().length() < 10) {
                 Toast.makeText(FormPage.this,"Please Enter a VALID Phone Number",Toast.LENGTH_SHORT).show();
             }
 
@@ -58,6 +56,20 @@ public class FormPage extends AppCompatActivity {
                 rootNode = FirebaseDatabase.getInstance();
                 //calling the table
                 root_child = rootNode.getReference("names").push();
+
+                root_child.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            incrementer = snapshot.getChildrenCount();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
                 String name = idName.getText().toString();
                 String application_no = idApp.getText().toString();
@@ -68,49 +80,32 @@ public class FormPage extends AppCompatActivity {
                 String file_created = "0";
                 String payment = "0";
                 String email_create = "0";
+                String ticket_no = String.valueOf(incrementer);
+                String time_rem = "";
 
-//                String [] keys = {"name","application_no","phone_no","email","form_fill","verified","file_created","payment"
-//                                    ,"email_create"};
-//
-//                String [] values = {name, application_no, phone_no, email, form_fill, verified, file_created,
-//                                    payment,email_create};
-//
-//                Map<String, JSONObject> userMap= new HashMap<String, JSONObject>();
-//                JSONObject obj = new JSONObject();
-//                try {
-//                    obj.put("name",name);
-//                    obj.put("application_no",application_no);
-//                    obj.put("phone_no",phone_no);
-//                    obj.put("email",email);
-//                    obj.put("form_fill","0");
-//                    obj.put("verified","0");
-//                    obj.put("file_created","0");
-//                    obj.put("payment","0");
-//                    obj.put("email_create","0");
-//                } catch (JSONException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//                userMap.put("myUser", obj);
-
-                UserHelper obj = new UserHelper(name,application_no,phone_no,email,form_fill,verified,file_created,payment,email_create);
+                UserHelper obj = new UserHelper(name,application_no,phone_no,email,ticket_no,form_fill,verified,file_created,payment,email_create,time_rem);
                 //creating new child
                 obj.setName(name);
                 obj.setApplication_no(application_no);
                 obj.setPhone_no(phone_no);
                 obj.setEmail(email);
+                obj.setTicket_no(ticket_no);
                 obj.setForm_fill(form_fill);
                 obj.setVerified(verified);
                 obj.setFile_created(file_created);
                 obj.setPayment(payment);
                 obj.setEmail_create(email_create);
-//                Toast.makeText(getApplicationContext(),"Done", Toast.LENGTH_LONG).show();
+                obj.setTime_rem(time_rem);
 
+                //adding a new child
                 root_child.setValue(obj);
+                String token = String.valueOf(root_child).substring(41);
+//                Toast.makeText(FormPage.this,String.valueOf(token), Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(FormPage.this, QueuePage.class);
                 intent.putExtra("Name", idName.getText().toString().trim());
                 intent.putExtra("ApplicationNumber", idApp.getText().toString().trim());
+                intent.putExtra("token",token);
                 startActivity(intent);
             }
         });

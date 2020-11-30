@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="match_parent"
+            android:layout_width="339dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
@@ -54,8 +54,8 @@
 
         <TextView
             android:id="@+id/tvAppNum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="348dp"
+            android:layout_height="38dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/open_sans_semibold"
@@ -64,18 +64,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvTicketNum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="@string/ticket_number"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
@@ -111,7 +99,6 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/open_sans_bold"
-            android:text="@string/hr_m"
             android:textColor="#FFFFFF"
             android:textSize="28sp"
             android:textStyle="bold" />
@@ -125,7 +112,7 @@
 
         <Button
             android:id="@+id/btnLeaveQueue"
-            android:layout_width="wrap_content"
+            android:layout_width="117dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="48dp"
             android:layout_marginTop="10dp"
@@ -134,7 +121,24 @@
             android:background="@drawable/button_danger"
             android:fontFamily="@font/open_sans_bold"
             android:stateListAnimator="@animator/button_animator"
-            android:text="@string/leave_queue"
+            android:text="Leave"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btnRefresh"
+            android:layout_width="126dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/drawable_button"
+            android:fontFamily="@font/open_sans_bold"
+            android:stateListAnimator="@animator/button_animator"
+            android:text="Refresh"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold"
