@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -64,7 +63,7 @@ public class QueuePage extends AppCompatActivity {
                     tvWaitTime.setText("20 minutes");
                 }
                 else{
-                    tvWaitTime.setText(time + " min");
+                    tvWaitTime.setText(time + " minutes");
                 }
             }
 
