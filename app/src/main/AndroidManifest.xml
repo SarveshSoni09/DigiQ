@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".DigiQ"
         android:allowBackup="true"
         android:enabled="true"
         android:icon="@mipmap/ic_launcher"
