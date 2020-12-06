@@ -65,13 +65,13 @@ public class QueuePage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String time = snapshot.child("time_rem").getValue().toString();
                 if(time.equals("")){
-                    tvWaitTime.setText("20 minutes");
+                    tvWaitTime.setText("25 minutes");
                 }
                 else{
                     tvWaitTime.setText(time + " minutes");
                 }
 
-                if(tvWaitTime.getText().toString().trim() == "20 minutes") {
+                if(tvWaitTime.getText().toString().trim().equals("20 minutes") ) {
                     Notification notification = new NotificationCompat.Builder(QueuePage.this, NOTIFICATION_ID)
                             .setSmallIcon(R.drawable.ic_launcher_foreground)
                             .setContentTitle("Get Ready")
