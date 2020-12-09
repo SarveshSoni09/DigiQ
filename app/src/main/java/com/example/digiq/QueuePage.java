@@ -71,7 +71,7 @@ public class QueuePage extends AppCompatActivity {
                     tvWaitTime.setText(time + " minutes");
                 }
 
-                if(tvWaitTime.getText().toString().trim().equals("20 minutes") ) {
+                if(tvWaitTime.getText().toString().trim().equals("5 minutes") ) {
                     Notification notification = new NotificationCompat.Builder(QueuePage.this, NOTIFICATION_ID)
                             .setSmallIcon(R.drawable.ic_launcher_foreground)
                             .setContentTitle("Get Ready")
