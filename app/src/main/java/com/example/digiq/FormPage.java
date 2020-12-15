@@ -2,23 +2,30 @@ package com.example.digiq;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.google.common.collect.Range;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.utilities.Validation;
 
 public class FormPage extends AppCompatActivity {
-    EditText idName , idApp , idPhone , idEmail;
-    Button btnJoin;
+    private EditText idName , idApp , idPhone , idEmail;
+    private Button btnJoin;
 
+    private AwesomeValidation awesomeValidation;
     FirebaseDatabase rootNode;
     DatabaseReference root_child;
 
@@ -29,30 +36,36 @@ public class FormPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_page);
 
-        idName=findViewById(R.id.idName);
-        idApp=findViewById(R.id.idApp);
-        idPhone=findViewById(R.id.idPhone);
-        idEmail=findViewById(R.id.idEmail);
-        btnJoin=findViewById(R.id.btnJoin);
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        btnJoin.setOnClickListener(v -> {
-            if(idName.getText().toString().isEmpty() || idPhone.getText().toString().isEmpty() || idApp.getText().toString().isEmpty() || idEmail.getText().toString().isEmpty())
-            {
-                Toast.makeText(FormPage.this,"Please Enter ALL Fields!",Toast.LENGTH_SHORT).show();
-            }
+        idName = (EditText) findViewById(R.id.idName);
+        idApp = (EditText) findViewById(R.id.idApp);
+        idPhone = (EditText) findViewById(R.id.idPhone);
+        idEmail = (EditText) findViewById(R.id.idEmail);
+        btnJoin = (Button) findViewById(R.id.btnJoin);
 
-            else if(!idEmail.getText().toString().matches(emailPattern)) {
-                Toast.makeText(FormPage.this,"Please Enter a VALID Email Address",Toast.LENGTH_SHORT).show();
-            }
+        awesomeValidation.addValidation(this, R.id.idName, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
+        awesomeValidation.addValidation(this, R.id.idApp,"[0-9]{8}" , R.string.applicationnumbererror);
+        awesomeValidation.addValidation(this, R.id.idEmail, "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+", R.string.emailerror);
+        awesomeValidation.addValidation(this, R.id.idPhone, "^[2-9]{2}[0-9]{8}$", R.string.phonenumbererror);
 
-            else if(idPhone.getText().toString().trim().length() < 10) {
-                Toast.makeText(FormPage.this,"Please Enter a VALID Phone Number",Toast.LENGTH_SHORT).show();
-            }
 
-            else{
-                //calls the root node
+
+        btnJoin.setOnClickListener(this::onClick);
+    }
+    private void submitForm(){
+
+        if(awesomeValidation.validate()) {
+            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void onClick(View view){
+
+        if(view== btnJoin){
+           submitForm();
+
+            //calls the root node
                 rootNode = FirebaseDatabase.getInstance();
                 //calling the table
                 root_child = rootNode.getReference("names").push();
@@ -70,6 +83,7 @@ public class FormPage extends AppCompatActivity {
 
                     }
                 });
+
 
                 String name = idName.getText().toString();
                 String application_no = idApp.getText().toString();
@@ -108,7 +122,7 @@ public class FormPage extends AppCompatActivity {
                 intent.putExtra("token",token);
                 startActivity(intent);
             }
-        });
+
 
 
 

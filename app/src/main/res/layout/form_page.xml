@@ -65,6 +65,7 @@
         android:fontFamily="@font/open_sans_semibold"
         android:hint="@string/e_g_20200001"
         android:inputType="number"
+        android:maxLength="8"
         android:paddingStart="8dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp" />
@@ -148,4 +149,5 @@
         android:text="@string/join_queue"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
+
 </LinearLayout>

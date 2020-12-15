@@ -29,4 +29,11 @@
     <string name="invalid_qr">Invalid QR code !</string>
     <string name="app_num">Application number: </string>
     <string name="name_show">Name: </string>
+
+    <string name="nameerror">Enter a valid name</string>
+    <string name="emailerror">Enter a valid email</string>
+    <string name="phonenumbererror">Enter a valid phone number</string>
+    <string name="applicationnumbererror">Enter a valid application</string>
+
+
 </resources>
