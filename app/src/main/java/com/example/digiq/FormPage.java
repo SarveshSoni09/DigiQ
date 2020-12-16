@@ -73,7 +73,7 @@ public class FormPage extends AppCompatActivity {
     }
     public void submitForm(){
         if (awesomeValidation.validate()) {
-            Toast.makeText(this, "Registration Successful", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Registeration Successful", Toast.LENGTH_LONG).show();
 
             rootNode = FirebaseDatabase.getInstance();
             //calling the table
